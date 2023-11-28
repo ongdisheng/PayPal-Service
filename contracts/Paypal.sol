@@ -74,7 +74,7 @@ contract Paypal {
         // remove executed request
         addHistory(msg.sender, payableRequest.requestor, payableRequest.amount, payableRequest.message);
         myRequests[requestIdx] = myRequests[myRequests.length - 1];
-        myRequests.pop()
+        myRequests.pop();
     }
 
     // keep track of transaction history
@@ -89,15 +89,15 @@ contract Paypal {
         }
         history[sender].push(send);
 
-        Transaction memory receive;
-        receive.action = "+";
-        receive.amount = _amount;
-        receive.message = _message;
-        receive.otherPartyAddress = sender;
+        Transaction memory newReceive;
+        newReceive.action = "+";
+        newReceive.amount = _amount;
+        newReceive.message = _message;
+        newReceive.otherPartyAddress = sender;
         if (users[sender].hasName) {
-            receive.otherPartyName = users[sender].name;
+            newReceive.otherPartyName = users[sender].name;
         }
-        history[receiver].push(receive);
+        history[receiver].push(newReceive);
     }
 
     // retrieve all requests sent to a user
